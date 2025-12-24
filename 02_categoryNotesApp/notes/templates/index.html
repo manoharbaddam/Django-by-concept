@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block title %}Notes{% endblock %}
+
+{% block content %}
+    <h2><a href="{% url 'create_note' %}" >Create Note</a></h2>
+ <div class="col  gy-4">
+    {% for note in notes %}
+        <div class="card" style="width: 24rem;">
+            <div class="card-body">
+                <h5 class="card-title">{{note.title}} </h5>
+                <p class="card-text"><small>{{note.category}} </small></p>
+                <p class="card-text">{{note.content}}</p>
+                <a href="{% url 'view_note' note.id %}" class="btn btn-primary">View Note</a>
+                <a href="{% url 'edit_note' note.id %}" class="btn btn-primary">Edit Note</a>
+                <a href="{% url 'delete_note' note.id %}" class="btn btn-danger">Delete Note</a>
+
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

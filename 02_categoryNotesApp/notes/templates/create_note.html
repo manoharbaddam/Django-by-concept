@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+
+{% block title %}Crete form{% endblock %}
+
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        {{form}}
+        <button type="submit">Add Note</button>
+        <a href="{% url 'index' %}">Return Home</a>
+    </form>
+{% endblock %}

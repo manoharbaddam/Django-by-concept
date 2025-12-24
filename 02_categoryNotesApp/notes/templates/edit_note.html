@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+
+{% block title %}Edit Note{% endblock %}
+
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        {{form}}
+        <button type="submit" class="btn btn-primary">update Note</button>
+        <a href="{% url 'index' %}" class="btn btn-info ">return Home</a>
+    </form>
+
+{% endblock %}

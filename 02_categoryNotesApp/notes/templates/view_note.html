@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block title %}View Note{% endblock %}
+
+{% block content %}  
+    <div class="card" style="width: rem;">
+            <div class="card-body">
+                <h5 class="card-title">{{note.title}} </h5>
+                <p class="card-text"><small>{{note.category}} </small></p>
+                <p class="card-text">{{note.content}}</p>
+                <a href="{% url 'edit_note' note.id %}" class="btn btn-primary">Edit Note</a>
+                <a href="{% url 'delete_note' note.id %}" class="btn btn-danger">Delete Note</a>
+                <a href="{% url 'index' %}" class="btn btn-info">return Home</a>
+            </div>
+        </div>
+{% endblock %}
