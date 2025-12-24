@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+
+{% block title %}Delete Note{% endblock %}
+
+{% block content %}
+<h1>Are you sure to delete this Note?</h1>  
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Delete Note</button>
+        <a href="{% url "index" %}" class="btn btn-primary">Home</a>
+    </form>
+{% endblock %}

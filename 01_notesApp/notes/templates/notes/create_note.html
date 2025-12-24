@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block title %}Create Notes{% endblock %}
+
+{% block content %}
+<h1>hello</h1>
+<div>
+    <form method="post" enctype ="multipart/form-data" >
+        {% csrf_token %}
+        {{form}}
+        <button class="btn btn-warning" type="submit">Submit</button>
+    </form>
+    <a href="{% url 'index' %}" class="btn btn-primary">Home</a>
+
+</div>
+{% endblock %}
