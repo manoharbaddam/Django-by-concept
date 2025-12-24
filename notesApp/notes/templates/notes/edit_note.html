@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block title %}Edit Note{% endblock %}
+
+{% block content %}
+<div> 
+
+    <form method="POST">
+        {% csrf_token %}
+        {{form}}
+        <button type="submit" >Submit</button>
+    </form>
+</div>
+{% endblock %}
