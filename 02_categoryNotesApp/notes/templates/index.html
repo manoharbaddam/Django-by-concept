@@ -19,7 +19,10 @@
         <div class="card" style="width: 24rem;">
             <div class="card-body">
                 <h5 class="card-title">{{note.title}} </h5>
-                <p class="card-text"><small>{{note.category}} </small></p>
+                <span>
+                    <p class="card-text"><small>{{note.category}} </small></p>
+                    <a href="{% url 'category_notes' note.category.id %}"> view more</a>
+                </span>
                 <p class="card-text">{{note.content}}</p>
                 <a href="{% url 'view_note' note.id %}" class="btn btn-primary">View Note</a>
                 <a href="{% url 'edit_note' note.id %}" class="btn btn-primary">Edit Note</a>
