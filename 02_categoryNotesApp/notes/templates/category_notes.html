@@ -1,21 +1,10 @@
 {% extends "layout.html" %}
 
-{% block title %}Notes{% endblock %}
+{% block title %}Category Notes{% endblock %}
 
 {% block content %}
-    <h2><a href="{% url 'create_note' %}" >Create Note</a></h2>
- <div class="col  gy-4">
-
-    <div>
-        <h1>Existing Categories</h1>
-        {% for cat in cats  %}
-            <h4> {{cat.category_name}}</h4>
-            <a href="{% url 'category_notes' cat.id %}">View More</a>
-        {% endfor %}
-    </div> 
-
-
-    {% for note in notes %}
+   <h1> Notes in {{cat_title}} </h1> 
+     {% for note in notes %}
         <div class="card" style="width: 24rem;">
             <div class="card-body">
                 <h5 class="card-title">{{note.title}} </h5>
@@ -27,6 +16,5 @@
 
             </div>
         </div>
-    {% endfor %}
-</div>
+        {%endfor%}
 {% endblock %}

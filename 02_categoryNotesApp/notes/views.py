@@ -1,12 +1,13 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from django.http import HttpResponse
-from .models import Notes
+from .models import Notes,Category
 from .forms import CreateNoteForm
 
 # Create your views here.
 def index(request):
     notes = Notes.objects.order_by("category")
-    return render(request,'index.html',{'notes':notes})
+    cats = Category.objects.all()
+    return render(request,'index.html',{'notes':notes,'cats':cats})
 
 def create_note(request):
     if request.method == "POST":
@@ -42,3 +43,8 @@ def delete_note(request,note_id):
         note.delete()
         return redirect('index')
     return render(request,'delete_note.html',{'note':note})
+
+def category_notes(request,cat_id):
+    cat_title = Category.objects.get(id=cat_id)
+    notes = Notes.objects.filter(category_id=cat_id)
+    return render(request,'category_notes.html',{'notes':notes,'cat_title':cat_title})
