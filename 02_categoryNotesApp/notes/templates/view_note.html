@@ -10,7 +10,7 @@
                 <p class="card-text">{{note.content}}</p>
                 <a href="{% url 'edit_note' note.id %}" class="btn btn-primary">Edit Note</a>
                 <a href="{% url 'delete_note' note.id %}" class="btn btn-danger">Delete Note</a>
-                <a href="{% url 'index' %}" class="btn btn-info">return Home</a>
             </div>
         </div>
+        <a href="{% url 'index' %}" class="btn btn-info">return Home</a>
 {% endblock %}

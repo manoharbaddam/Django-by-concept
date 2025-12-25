@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from django.http import HttpResponse
 from .models import Notes,Category
-from .forms import CreateNoteForm
+from .forms import CreateNoteForm,CreateCategory
 
 # Create your views here.
 def index(request):
@@ -48,3 +48,12 @@ def category_notes(request,cat_id):
     cat_title = Category.objects.get(id=cat_id)
     notes = Notes.objects.filter(category_id=cat_id)
     return render(request,'category_notes.html',{'notes':notes,'cat_title':cat_title})
+
+def create_category(request):
+    if request.method=="POST":
+        form = CreateCategory(request.POST)
+        form.save()
+        return redirect('index')
+    else:
+        form = CreateCategory()
+    return render(request,'create_category.html',{'form':form})

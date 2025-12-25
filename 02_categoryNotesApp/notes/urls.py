@@ -8,4 +8,5 @@ urlpatterns = [
     path('<int:note_id>/edit/',views.edit_note,name="edit_note"),
     path('<int:note_id>/delete',views.delete_note,name="delete_note"),
     path('<int:cat_id>/categorynotes',views.category_notes,name='category_notes'),
+    path('createcategory',views.create_category,name='create_category'),
 ]

@@ -13,8 +13,8 @@
                 <a href="{% url 'view_note' note.id %}" class="btn btn-primary">View Note</a>
                 <a href="{% url 'edit_note' note.id %}" class="btn btn-primary">Edit Note</a>
                 <a href="{% url 'delete_note' note.id %}" class="btn btn-danger">Delete Note</a>
-
             </div>
         </div>
         {%endfor%}
+    <a href="{% url 'index' %}">Home</a>
 {% endblock %}
