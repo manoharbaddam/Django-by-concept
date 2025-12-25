@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+
+{% block title %}Categories{% endblock %}
+
+{% block content %}
+    {% for category in categories  %}
+    <span>
+        <p>{{category.category_name}}</p>
+        <a href="{% url 'category_notes' category.id %}">view notes</a>
+    </span>
+    {% endfor %}
+{% endblock %}

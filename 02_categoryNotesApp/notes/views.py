@@ -57,3 +57,7 @@ def create_category(request):
     else:
         form = CreateCategory()
     return render(request,'create_category.html',{'form':form})
+
+def category_list(request):
+    categories = Category.objects.all()
+    return render(request,'category_list.html',{'categories':categories})
