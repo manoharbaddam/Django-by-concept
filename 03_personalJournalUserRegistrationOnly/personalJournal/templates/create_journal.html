@@ -1,12 +1,16 @@
 {% extends "layout.html" %}
+{% load static %}
 
 {% block title %}Create Journal{% endblock %}
 
 {% block content %} 
-    <form method="post"> 
+<div class="container">
+    <form method="post"  enctype="multipart/form-data"> 
         {% csrf_token %}
-        {{form}}
+        {{form.as_p}}
         <button type="submit">Create </button>
     </form>
     <a href="{% url 'index' %}">Home</a>
+
+</div>
 {% endblock %}

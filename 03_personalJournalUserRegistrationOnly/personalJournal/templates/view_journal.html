@@ -3,4 +3,14 @@
 {% block content %} 
   <h1>{{journal.title}}</h1>
   <p>{{journal.id}}</p>
+    <div class="card" style="width: 70rem; ">
+  <img src="{{journal.image.url}}" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">{{journal.title}}</h5>
+    <p class="card-text">{{journal.content}}</p>
+    <a href="{% url 'view_journal' journal.id %}" class="btn btn-primary">View More</a>
+    <a href="{% url 'edit_journal' journal.id %}" class="btn btn-primary">edit</a>
+
+  </div>
+</div>
 {% endblock %}
