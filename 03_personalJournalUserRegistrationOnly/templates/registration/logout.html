@@ -1,8 +1,15 @@
 {% extends "layout.html" %}
-{% load static %}   
 
-{% block title %}logout{% endblock %}
+{% block title %}Logout{% endblock %}
 
 {% block content %}
-    <h1>Successfully Logged out</h1>
+  <h2>Logout</h2>
+
+  <form method="post" action="{% url 'logout' %}">
+    {% csrf_token %}
+    <p>Are you sure you want to logout?</p>
+
+    <button type="submit">Yes, Logout</button>
+    <a href="{% url 'index' %}">Cancel</a>
+  </form>
 {% endblock %}

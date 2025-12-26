@@ -22,7 +22,18 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'create' %}">Create</a>
                     </li>
-                    {% if user is not None %}
+                   {% if user.is_authenticated %}
+                       {% comment %} <form method="post" action="{% url 'logout' %}">
+                            {% csrf_token %}
+                            <button type="submit" class="nav-link btn btn-link">
+                            Logout
+                            </button>
+                        </form> {% endcomment %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'logout_view' %}">Logout</a>
+                        </li>
+
+                    {% else %}
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'login' %}">Login</a>
                         </li>

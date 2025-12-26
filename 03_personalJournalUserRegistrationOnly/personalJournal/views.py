@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from .forms import JournalCreationForm,UserRegistrationForm,UserCreationForm
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import authenticate,login
+from django.contrib.auth import authenticate,login,logout
 from django.contrib import messages
 from .models import Journal
 
@@ -66,3 +66,9 @@ def login_view(request):
             messages.info(request, 'This is an informational message!')
             return render(request,'login.html')
     return render(request,'registration/login.html')
+
+def logout_view(request):
+    if request.method=="POST":
+        logout(request)
+        return redirect('index')
+    return render(request,'registration/logout.html')
