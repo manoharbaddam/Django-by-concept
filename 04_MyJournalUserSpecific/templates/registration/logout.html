@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+
+{% block title %}Logout{% endblock %}
+
+{% block content %}
+<h1>Are you sure to logout?</h1>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Confrim Logout</button>
+    </form>
+{% endblock %}

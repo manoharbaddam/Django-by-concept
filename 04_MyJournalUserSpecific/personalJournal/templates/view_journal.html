@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+
+{% block title %}Journals{% endblock %}
+
+{% block content %}
+<h1>My Journal</h1>
+    <div class="card" style="width: 80rem;">
+        {% if journal.image %}
+            <img src="{{ journal.image.url }}" class="card-img-top" alt="img">
+            {% else %}  
+            <img src="" class="card-img-top" alt="img">
+        {% endif %}
+        <div class="card-body">
+            <h5 class="card-title">{{journal.title}}</h5>
+            <p class="card-text">{{journal.content}}</p>
+            <a href="#" class="btn btn-primary">Edit </a>
+        </div>
+    </div>
+{% endblock %}

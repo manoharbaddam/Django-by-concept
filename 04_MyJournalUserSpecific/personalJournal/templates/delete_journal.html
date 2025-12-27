@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block title %}delete{% endblock %}
+
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        <div class="card" style="width: 18rem;">
+            {% if journal.image %}
+                <img src="{{ journal.image.url }}" class="card-img-top" alt="img">
+                {% else %}  
+                <img src="" class="card-img-top" alt="img">
+            {% endif %}
+            <div class="card-body">
+                <h5 class="card-title">{{journal.title}}</h5>
+                <p class="card-text">{{journal.content}}</p>
+            </div>
+        </div>
+        <p>Confirm to Delete journal</p>
+        <button type="submit">Delete</button>
+    </form>
+{% endblock %}
