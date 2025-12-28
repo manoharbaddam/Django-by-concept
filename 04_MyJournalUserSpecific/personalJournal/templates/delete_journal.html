@@ -3,6 +3,7 @@
 {% block title %}delete{% endblock %}
 
 {% block content %}
+    <h3>Confirm to Delete journal</h3>
     <form method="post">
         {% csrf_token %}
         <div class="card" style="width: 18rem;">
@@ -16,7 +17,6 @@
                 <p class="card-text">{{journal.content}}</p>
             </div>
         </div>
-        <p>Confirm to Delete journal</p>
         <button type="submit">Delete</button>
     </form>
 {% endblock %}
