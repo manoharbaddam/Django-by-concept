@@ -1,11 +1,11 @@
 from django.shortcuts import render,redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse
 from .forms import CreateCustomUserForm,UserLoginForm
 
 # Create your views here.
 def index(request):
-    return render(request,'register.html')
+    return render(request,'index.html')
 
 
 def register_user(request):
@@ -36,3 +36,10 @@ def login_user(request):
                 form.add_error(None,"Invalid email or password")
     
     return render(request,'login_user.html',{'form':form})
+
+def logout_user(request):
+    user = request.user
+    if request.method == "POST":
+        logout(request)
+        return redirect('index')
+    return render(request,'logout_user.html')

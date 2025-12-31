@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+    <h1>This is Index Page</h1>
+    {% if user.is_authenticated %}
+        <h2>{{user}}</h2>
+        <a href="{% url 'logout_user' %}">Logout User</a>
+    {% else %}
+        <a href="{% url 'register_user' %}">Register User</a>
+        <a href="{% url 'login_user' %}">Login User</a>
+    {% endif %}
+{% endblock %}
