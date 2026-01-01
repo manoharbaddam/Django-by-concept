@@ -10,7 +10,7 @@ class CustomUserManager(BaseUserManager):
 
         email = self.normalize_email(email)
         user = self.model(email=email,**other_fields)
-        user.set_passowrd(password)
+        user.set_password(password)
         user.save()
         return user
     
@@ -43,7 +43,7 @@ class CustomUser(AbstractBaseUser,PermissionsMixin):
     is_staff = models.BooleanField(default=False)
 
     objects = CustomUserManager()
-    
+
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name','role']
 
