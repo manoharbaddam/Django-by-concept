@@ -5,4 +5,9 @@
 
 {% block content %}
     <h1>User Logout Form</h1>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Confirm Logout</button>
+    </form>
+    <a href="{% url 'index' %}">Home</a>
 {% endblock %}

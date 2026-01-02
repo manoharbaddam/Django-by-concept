@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from django.contrib.auth import login,authenticate
+from django.contrib.auth import login,authenticate,logout
 from .forms import CustomUserForm,UserLoginForm
 # from django.http import request
 
@@ -38,6 +38,12 @@ def login_user(request):
     else:
         form = UserLoginForm()
     return render(request,'registration/login_user.html',{'form':form})
+
+def logout_user(request):
+    if request.method=="POST":
+        logout(request)
+        return redirect('index')
+    return render(request,'registration/logout_user.html')
         
 
 def mapUserToTemplate(request,user):

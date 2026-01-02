@@ -6,8 +6,12 @@
 {% block content %}
     <h1>Home Page</h1>
     <div class="links">
-        <h2>Login</h2>
-        <h2>Logout</h2>
-        <h2>Register</h2>
+        {% if user.is_authenticated %}
+        <h3><a href="{% url 'logout_user' %}">Logout</a></h3>
+        {% else %}
+        <h3><a href="{% url 'register_user' %}">Register</a></h3>
+        <h3><a href="{% url 'login_user' %}">Login</a></h3>
+        
+        {% endif %}
     </div>
 {% endblock %}
