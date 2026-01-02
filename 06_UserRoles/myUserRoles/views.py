@@ -1,5 +1,8 @@
 from django.shortcuts import render,redirect
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login,authenticate,logout
+from django.http import HttpResponseForbidden
+
 from .forms import CustomUserForm,UserLoginForm
 # from django.http import request
 
@@ -14,7 +17,8 @@ def register_user(request):
             user = form.save(commit=False)
             user.is_active = True 
             user.save()
-            return mapUserToTemplate(request,user=user)
+            login(request,user)
+            return redirect_to_user_dashboard(user)
     else:
         form = CustomUserForm()
     return render(request,'registration/register_user.html',{'form':form})
@@ -26,13 +30,10 @@ def login_user(request):
         if form.is_valid():
             email = form.cleaned_data['email']
             password = form.cleaned_data['password']
-            print(f"{email} {password}")
             user = authenticate(request,email=email,password=password)
-            
-            print(user)
             if user is not None:
                 login(request,user)
-                return mapUserToTemplate(request,user)
+                return redirect_to_user_dashboard(user)
             else :
                 form.add_error(None,"Invalid email or password")
     else:
@@ -46,10 +47,29 @@ def logout_user(request):
     return render(request,'registration/logout_user.html')
         
 
-def mapUserToTemplate(request,user):
-    if user.role =="ADMIN":
-        return render(request,'Dashboards/admin_dashboard.html')
-    elif user.role=="MEMBER":
-        return render(request,'Dashboards/member_dashboard.html')
-    else:
-        return render(request,'Dashboards/guest_dashboard.html')
+def redirect_to_user_dashboard(user):
+    role_urls ={
+        'ADMIN' : 'admin_dashboard',
+        'MEMBER': 'member_dashboard',
+        'GUEST': 'guest_dashboard',
+    }
+
+    return redirect(role_urls.get(user.role,'guest_dashboard'))
+
+@login_required(login_url='login_user')
+def admin_dashboard(request):
+    if request.user.role != 'ADMIN':
+        return HttpResponseForbidden("You don't have permission to access this page.")
+    return render(request, 'Dashboards/admin_dashboard.html', {'user': request.user})
+
+@login_required(login_url='login_user')
+def member_dashboard(request):
+    if request.user.role != 'MEMBER':
+        return HttpResponseForbidden("You don't have permission to access this page.")
+    return render(request, 'Dashboards/member_dashboard.html', {'user': request.user})
+
+@login_required(login_url='login_user')
+def guest_dashboard(request):
+    if request.user.role != 'GUEST':
+        return HttpResponseForbidden("You don't have permission to access this page.")
+    return render(request, 'Dashboards/guest_dashboard.html', {'user': request.user})

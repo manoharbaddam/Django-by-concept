@@ -23,4 +23,7 @@ urlpatterns = [
     path('register/',views.register_user,name="register_user"),
     path('login/',views.login_user,name="login_user"),
     path('logout/',views.logout_user,name="logout_user"),
+    path('dashboard/admin/', views.admin_dashboard, name="admin_dashboard"),
+    path('dashboard/member/', views.member_dashboard, name="member_dashboard"),
+    path('dashboard/guest/', views.guest_dashboard, name="guest_dashboard"),
 ]
