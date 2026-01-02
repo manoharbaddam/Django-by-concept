@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block title %}Registration{% endblock %}
+
+{% block content %}
+    User Registration Form
+    <form method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit">Register</button>
+    </form>
+    <a href="{% url 'index' %}">Home</a>
+{% endblock %}
