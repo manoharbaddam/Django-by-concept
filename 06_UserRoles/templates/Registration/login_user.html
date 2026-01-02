@@ -5,4 +5,10 @@
 
 {% block content %}
     <h1>Login Form</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{form}}
+        <button type="submit">Login</button>
+    </form>
+    <a href="{% url 'index' %}">Home</a>
 {% endblock %}

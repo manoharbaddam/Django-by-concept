@@ -8,7 +8,7 @@ class CustomUserForm(forms.ModelForm):
 
     class Meta:
         model = CustomUser
-        fields = ["email", "first_name",'role', "password", "password2"]
+        fields = ["email", "first_name",'role']
 
     def clean(self):
         cleaned = super().clean()
@@ -24,5 +24,8 @@ class CustomUserForm(forms.ModelForm):
 
         return user
 
+class UserLoginForm(forms.Form):
+    email = forms.EmailField(label="Email ")
+    password = forms.CharField(label="Password ",widget=forms.PasswordInput)
 
 
