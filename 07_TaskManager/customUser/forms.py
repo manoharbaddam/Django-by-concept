@@ -9,7 +9,7 @@ class CustomUserForm(forms.ModelForm):
 
     class Meta:
         model = CustomUserModel
-        fields = ["email", "user_name", "first_name"]
+        fields = ["email", "user_name", "first_name","role"]
 
     def clean_password(self):
         cleaned = super().clean()
@@ -23,3 +23,7 @@ class CustomUserForm(forms.ModelForm):
         if commit:
             user.save()
         return user
+
+class UserLoginForm(forms.Form):
+    email = forms.EmailField(label="Email ",required = True)
+    password = forms.CharField(label="Password ", widget=forms.PasswordInput)

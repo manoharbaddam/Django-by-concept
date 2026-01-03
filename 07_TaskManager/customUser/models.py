@@ -33,10 +33,16 @@ class CustomUserManager(BaseUserManager):
 
 
 class CustomUserModel(AbstractBaseUser, PermissionsMixin):
+    roles = {
+        'ADMIN':'Admin',
+        'USER':'User',
+    }
+
     email = models.EmailField(unique=True)
     user_name = models.CharField(max_length=125)
     first_name = models.CharField(max_length=125)
     last_name = models.CharField(max_length=225, blank=True)
+    role = models.CharField(max_length=10,choices=roles)
     is_active = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
 
