@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+
+{% block title %}Create Project{% endblock %}
+
+{% block content %} 
+    Create Project
+    <form method="post">
+        {% csrf_token %}
+        {{form}}
+        <button type="submit">Create Project</button>
+    </form>
+{% endblock %}
