@@ -5,7 +5,7 @@ from .models import CustomUserModel
 
 
 # Register your models here.
-class UserAdminConfig(admin.ModelAdmin):
+class UserAdminConfig(UserAdmin):
     model = CustomUserModel
     ordering = ("email","role")
     search_fields = ('email','user_name','first_name',)
@@ -14,7 +14,7 @@ class UserAdminConfig(admin.ModelAdmin):
 
     fieldsets = (
     ("Account", {
-        "fields": (("email", "user_name"),("password"))
+        "fields": (("email", "user_name"),)
     }),
     ("Personal Info", {
         "fields": (("first_name", "last_name"),)

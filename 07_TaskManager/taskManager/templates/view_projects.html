@@ -1,0 +1,23 @@
+{% extends "layout.html" %} 
+{% load static %}
+{% block title %}Projects{% endblock %} 
+
+{% block content %}
+ Projects Created
+<div>
+  {% for project in projects %}
+        <div class="card" style="width: 20rem ;">
+            <div class="card-body">
+            <h5 class="card-title">{{project.name}}</h5>
+            <h6 class="card-subtitle mb-2 text-body-secondary">No of Tasks : {{ project.project_tasks.count }}</h6>
+            <p class="card-text">
+                {{project.description}}
+            </p>
+            <a href="#" class="card-link">view all tasks</a>
+            {% comment %} <a href="#" class="card-link"></a> {% endcomment %}
+            </div>
+        </div>
+  {% endfor %}
+</div>
+
+{% endblock %}
