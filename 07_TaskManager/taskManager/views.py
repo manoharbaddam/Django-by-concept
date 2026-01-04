@@ -20,9 +20,9 @@ def create_project(request):
     return render(request,'create_project.html',{'form':form})
 
 def create_task(request):
-    form = TaskCreationForm()
+    form = TaskCreationForm(user=request.user)
     if request.method == "POST":
-        form = TaskCreationForm(request.POST)
+        form = TaskCreationForm(request.POST,user= request.user)
         if form.is_valid():
             form.save()
             return redirect('index')
