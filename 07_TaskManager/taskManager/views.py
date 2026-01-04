@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
 from .forms import ProjectCreationForm,TaskCreationForm
 from customUser.models import CustomUserModel
+from .models import Project,Task
 
 # Create your views here.
 
@@ -35,4 +36,8 @@ def view_projects(request):
     user = CustomUserModel.objects.get(id=user_id)
     projects = user.owned_projects.all()
     return render(request,'view_projects.html',{'projects':projects})
-        
+
+@login_required()
+def view_tasks(request,project_id):
+    tasks = Task.objects.filter(project_id=project_id)
+    return render(request,'view_tasks.html',{'tasks':tasks})

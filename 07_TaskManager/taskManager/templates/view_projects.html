@@ -13,10 +13,10 @@
             <p class="card-text">
                 {{project.description}}
             </p>
-            <a href="#" class="card-link">view all tasks</a>
+            <a href="{% url 'view_tasks' project.id %}" class="card-link">view all tasks</a>
             {% comment %} <a href="#" class="card-link"></a> {% endcomment %}
             </div>
-        </div>
+        </div>  
   {% endfor %}
 </div>
 

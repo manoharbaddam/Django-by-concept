@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block title %}Tasks{% endblock %}
+
+{% block content %}
+
+    {% for task in tasks %}
+        <div class="card" style="width: 20rem ;">
+            <div class="card-body">
+            <h5 class="card-title">{{task.name}}</h5>
+            <h6 class="card-subtitle mb-2 text-body-secondary">{{task.project}}</h6>
+            <p class="card-text">
+                Task Assigned to : {{task.assigned_to}}
+            </p>    
+            <h6 class="card-subtitle mb-2 text-body-secondary">
+                {% if task.completed %}
+                    Task Status: Completed
+                {% else %}
+                    Task Status: Pending
+                {% endif %}
+                </h6>
+            
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}
