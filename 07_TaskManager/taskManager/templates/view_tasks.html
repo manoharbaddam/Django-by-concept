@@ -21,8 +21,8 @@
                     Task Status: Pending
                 {% endif %}
                 </h6>
-            
+            <a href="{% url 'edit_tasks' task.id %}">Edit Task</a>
             </div>
         </div>
     {% endfor %}
-{% endblock %}
+{% endblock %}  

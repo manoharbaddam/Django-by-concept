@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+
+{% block title %} Filtered Tasks {% endblock %}
+
+{% block content %}
+
+    {% for task in filtered_tasks %}
+        {{task}}
+    {% endfor %}
+
+{% endblock %}

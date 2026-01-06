@@ -14,7 +14,7 @@
                 {{project.description}}
             </p>
             <a href="{% url 'view_tasks' project.id %}" class="card-link">view all tasks</a>
-            {% comment %} <a href="#" class="card-link"></a> {% endcomment %}
+            <a href="{% url 'filter_tasks' project.id %}" class="card-link">Task Filtered</a>
             </div>
         </div>  
   {% endfor %}
