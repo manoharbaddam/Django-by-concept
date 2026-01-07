@@ -3,9 +3,18 @@
 {% block title %} Filtered Tasks {% endblock %}
 
 {% block content %}
+    <h2>Completed Tasks</h2>
+    {% for task in completed_tasks %}
+        <p>{{ task.title }}</p>
+    {% empty %}
+        <p>No completed tasks</p>
+    {% endfor %}
 
-    {% for task in filtered_tasks %}
-        {{task}}
+    <h2>Pending Tasks</h2>
+    {% for task in pending_tasks %}
+        <p>{{ task.title }}</p>
+    {% empty %}
+        <p>No pending tasks</p>
     {% endfor %}
 
 {% endblock %}

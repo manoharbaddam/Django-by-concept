@@ -59,13 +59,10 @@ def edit_tasks(request,task_id):
 
 @login_required()
 def filter_tasks(request,project_id):
+    
     tasks = Task.objects.filter(project_id=project_id)
-    filtered_tasks = {
-        'completed' : [],
-        'pending':[],
-    }
 
-    filtered_tasks['completed'] = tasks.filter(completed = True)
-    filtered_tasks['pending'] = tasks.filter(completed =False)
-
-    return render(request,'view_tasks.html',{'filtered_tasks':filtered_tasks})
+    return render(request, 'filtered_tasks.html', {
+        'completed_tasks': tasks.filter(completed=True),
+        'pending_tasks': tasks.filter(completed=False),
+    })
