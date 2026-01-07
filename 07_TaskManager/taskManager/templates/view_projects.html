@@ -13,8 +13,14 @@
             <p class="card-text">
                 {{project.description}}
             </p>
-            <a href="{% url 'view_tasks' project.id %}" class="card-link">view all tasks</a>
-            <a href="{% url 'filter_tasks' project.id %}" class="card-link">Task Filtered</a>
+            <div>
+              <a href="{% url 'edit_project' project.id %}">Edit Project</a>
+              <a href="{% url 'delete_project' project.id %}">Delete Project</a>
+            </div>
+            <div>
+              <a href="{% url 'view_tasks' project.id %}" class="card-link">view all tasks</a>
+              <a href="{% url 'filter_tasks' project.id %}" class="card-link">Task Filtered</a>
+            </div>
             </div>
         </div>  
   {% endfor %}

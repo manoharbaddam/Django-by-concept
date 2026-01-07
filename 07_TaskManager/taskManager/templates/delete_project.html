@@ -6,6 +6,7 @@
 {% block content %}
     {{project.title}}
     <form method="POST">
+        {% csrf_token %}
         <button type="submit">Delete Project</button>
     </form>
 {% endblock %}

@@ -5,6 +5,7 @@
 {% block content %}
     {{project.title}}
     <form method="POST">
+        {% csrf_token %}
         {{form}}
         <button type="submit">Update</button>
     </form>

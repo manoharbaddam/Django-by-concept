@@ -20,7 +20,7 @@ def create_project(request):
             project = form.save(commit=False)
             project.owner = request.user
             project.save()
-            return redirect("index")
+            return redirect("view_projects")
     return render(request, "create_project.html", {"form": form})
 
 
@@ -51,8 +51,9 @@ def create_task(request):
     if request.method == "POST":
         form = TaskCreationForm(request.POST, user=request.user)
         if form.is_valid():
-            form.save()
-            return redirect("index")
+            task = form.save(commit=False)
+            task.save()
+            return redirect("view_tasks",project_id=task.project.id)
     return render(request, "create_task.html", {"form": form})
 
 
