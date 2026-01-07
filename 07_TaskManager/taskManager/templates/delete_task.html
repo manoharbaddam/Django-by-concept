@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+
+{% load static %}
+
+{% block title %}Delete task{% endblock %}
+
+{% block content %}
+    {{task.title}}
+    <form method="post">
+        <button type="submit">Delete Task</button>
+    </form>
+{% endblock %}

@@ -9,6 +9,9 @@
         {{form}}
         <button type="submit">Login</button>
     </form>
+    <div>
+        <h5>Don't have an Account? <a href="{% url 'register_view' %}">create Here</a></h5>
+    </div>
     <a href="{% url 'index' %}">Home</a>
 
 {% endblock %}
