@@ -43,18 +43,19 @@ def view_tasks(request,project_id):
     return render(request,'view_tasks.html',{'tasks':tasks})
 
 @login_required
-def edit_tasks(request, task_id):
-    task = get_object_or_404(Task, pk=task_id, user=request.user)
-
-    if request.method == "POST":
-        form = TaskCreationForm(request.POST, instance=task)
+def edit_tasks(request,task_id):
+    print(task_id)
+    task= get_object_or_404(Task,id=task_id)
+    if request.method=="POST":
+        form = TaskCreationForm(request.POST,instance=task,user=request.user)
         if form.is_valid():
             form.save()
             return redirect('index')
     else:
-        form = TaskCreationForm(instance=task)
+        form = TaskCreationForm(instance=task,user=request.user)
+    return render(request,'edit_tasks.html',{'form':form})
 
-    return render(request, 'edit_tasks.html', {'form': form})
+
 
 @login_required()
 def filter_tasks(request,project_id):
