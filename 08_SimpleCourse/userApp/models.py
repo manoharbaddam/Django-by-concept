@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser,PermissionsMixin,BaseUserManager
+from courses.models import Course
 
 # Create your models here.
 class CustomUserManager(BaseUserManager):
@@ -40,3 +41,5 @@ class CustomUser(AbstractBaseUser,PermissionsMixin):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name',]
 
+class Student(CustomUser):
+    enrolled_courses = models.ManyToManyField(Course)
