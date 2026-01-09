@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block title %}Registartion User{% endblock %}
+
+{% block content %}
+    <h1>Student Registartion Form</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{form}}
+        <button type="submit">Register</button>
+    </form>
+{% endblock %}

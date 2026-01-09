@@ -1,0 +1,51 @@
+[
+  {
+    "model": "app.course",
+    "fields": {
+      "title": "Introduction to Python",
+      "description": "Learn Python basics including syntax and data types."
+    }
+  },
+  {
+    "model": "app.course",
+    "fields": {
+      "title": "Web Development with Django",
+      "description": "Build full-stack web applications using Django."
+    }
+  },
+  {
+    "model": "app.course",
+    "fields": {
+      "title": "JavaScript for Beginners",
+      "description": "Learn JavaScript fundamentals and browser interactions."
+    }
+  },
+  {
+    "model": "app.course",
+    "fields": {
+      "title": "HTML & CSS Fundamentals",
+      "description": "Create modern, responsive websites."
+    }
+  },
+  {
+    "model": "app.course",
+    "fields": {
+      "title": "Database Fundamentals",
+      "description": "Understand relational databases and SQL."
+    }
+  },
+  {
+    "model": "app.course",
+    "fields": {
+      "title": "Git and Version Control",
+      "description": "Learn Git workflows and collaboration."
+    }
+  },
+  {
+    "model": "app.course",
+    "fields": {
+      "title": "Introduction to Machine Learning",
+      "description": "Explore basic machine learning concepts."
+    }
+  }
+]

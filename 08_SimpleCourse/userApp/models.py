@@ -43,3 +43,6 @@ class CustomUser(AbstractBaseUser,PermissionsMixin):
 
 class Student(CustomUser):
     enrolled_courses = models.ManyToManyField(Course)
+
+    def __str__(self):
+        return f"{self.first_name}"

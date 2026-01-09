@@ -5,3 +5,112 @@ body{
 h1{
     color: aqua;
 }
+/* 1. Global Reset & Variables */
+:root {
+  --nav-bg: rgba(255, 255, 255, 0.1); /* Glass effect base */
+  --nav-blur: 12px;
+  --nav-border: rgba(255, 255, 255, 0.2);
+  --text-main: #ffffff;
+  --accent-color: #00d4ff; /* Modern electric blue */
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(135deg, #1a1a2e, #16213e); /* Dark mode necessity */
+  min-height: 100vh;
+}
+
+/* 2. Glassmorphism Navigation Bar */
+.navbar {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 1200px;
+  padding: 1rem 2rem;
+  background: var(--nav-bg);
+  backdrop-filter: blur(var(--nav-blur));
+  -webkit-backdrop-filter: blur(var(--nav-blur)); /* Safari support */
+  border: 1px solid var(--nav-border);
+  border-radius: 50px; /* Floating pill shape */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+/* 3. Logo & Links */
+.logo {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-main);
+  text-decoration: none;
+  letter-spacing: -1px;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--text-main);
+  font-weight: 500;
+  font-size: 0.95rem;
+  position: relative;
+  transition: var(--transition);
+}
+
+/* 4. Active Indicator (2026 Underline Style) */
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--accent-color);
+  transition: var(--transition);
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+  width: 100%;
+}
+
+/* 5. Accessibility & Interaction */
+.nav-links a:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+/* 6. Mobile Responsiveness (Burger Menu Toggle) */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none; /* In a real app, use JS to toggle a .mobile-active class */
+  }
+  
+  .navbar {
+    top: 10px;
+    padding: 0.8rem 1.5rem;
+  }
+  
+  /* Touch target optimization */
+  .navbar a {
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+  }
+}
