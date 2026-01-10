@@ -27,7 +27,9 @@ class StudentCreationForm(forms.ModelForm):
         return user
     
 
-
+class StudentLoginForm(forms.Form):
+    email = forms.EmailField()
+    password = forms.CharField(widget=forms.PasswordInput)
     
         
 
