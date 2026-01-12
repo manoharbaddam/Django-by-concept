@@ -1,5 +1,5 @@
 body{
-    background-color: rgba(0, 0, 0, 0.882);
+    background-color: rgba(129, 129, 129, 0.882);
 }
 
 h1{
@@ -10,7 +10,7 @@ h1{
   --nav-bg: rgba(255, 255, 255, 0.1); /* Glass effect base */
   --nav-blur: 12px;
   --nav-border: rgba(255, 255, 255, 0.2);
-  --text-main: #ffffff;
+  --text-main: #727272;
   --accent-color: #00d4ff; /* Modern electric blue */
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -23,7 +23,7 @@ h1{
 
 body {
   font-family: 'Inter', sans-serif;
-  background: linear-gradient(135deg, #1a1a2e, #16213e); /* Dark mode necessity */
+  /* background: linear-gradient(135deg, #5c5c5c, #646464); Dark mode necessity */
   min-height: 100vh;
 }
 
