@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% load static %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+    <h1>Profile</h1>
+    {{request.user}}
+    <h3>Enrolled Courses</h3>
+    {% for course in courses_enrolled %}
+        <h5>{{course.title}}</h5>
+    {% endfor %}
+{% endblock %}

@@ -1,7 +1,8 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib.auth import login,logout,authenticate
 from .models import Student
 from .forms import StudentCreationForm, StudentLoginForm
+from courses.models import Course
 
 # Create your views here.
 def index(request):
@@ -40,3 +41,9 @@ def logout_view(request):
         logout(request)
         return redirect('index')
     return render(request,'logout.html')
+
+def profile(request):
+    student = get_object_or_404(Student,id=request.user.id)
+    courses_enrolled = student.enrolled_courses.all()
+    return render(request,'profile.html',{'courses_enrolled':courses_enrolled})
+

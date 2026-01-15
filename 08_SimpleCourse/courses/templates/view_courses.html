@@ -11,7 +11,7 @@
         <div class="card"> 
             <h3>{{course.title}}</h3>
             <p>{{course.description}}</p>
-            <a href="">Enroll</a>
+            <a href="{% url 'enroll_course' course.id %}">Enroll</a>
         </div>
     {% endfor %}
     </div>
