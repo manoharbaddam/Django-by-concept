@@ -44,5 +44,9 @@ class CustomUser(AbstractBaseUser,PermissionsMixin):
 class Student(CustomUser):
     enrolled_courses = models.ManyToManyField(Course)
 
+    def is_enrolled(self, course):
+        return self.enrolled_courses.filter(id=course.id).exists()
+
+
     def __str__(self):
         return f"{self.first_name}"

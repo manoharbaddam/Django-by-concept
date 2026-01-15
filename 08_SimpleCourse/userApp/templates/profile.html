@@ -8,7 +8,14 @@
     <h1>Profile</h1>
     {{request.user}}
     <h3>Enrolled Courses</h3>
-    {% for course in courses_enrolled %}
-        <h5>{{course.title}}</h5>
-    {% endfor %}
+    <div class="card">
+        {% for course in courses_enrolled %}
+            <h5>{{course.title}}</h5>
+            <p>{{course.description}}</p>
+            <form method="post" action="{% url 'unenroll_course' course.id %}">
+                {% csrf_token %}
+                <button type="submit">Unenroll</button>
+            </form>
+        {% endfor %}
+    </div>
 {% endblock %}

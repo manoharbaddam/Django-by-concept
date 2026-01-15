@@ -11,7 +11,16 @@
         <div class="card"> 
             <h3>{{course.title}}</h3>
             <p>{{course.description}}</p>
-            <a href="{% url 'enroll_course' course.id %}">Enroll</a>
+            {% if course not in request.user.student.enrolled_courses.all %}
+                <a href="{% url 'enroll_course' course.id %}">Enroll</a>
+            {% else %}
+            <form method="post" action="{% url 'unenroll_course' course.id %}">
+                {% csrf_token %}
+                <button type="submit">Unenroll</button>
+            </form>
+            {% endif %}
+
+
         </div>
     {% endfor %}
     </div>

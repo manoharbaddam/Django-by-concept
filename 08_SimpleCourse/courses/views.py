@@ -11,10 +11,17 @@ def view_courses(request):
 def enroll_course(request,course_id):
     course = get_object_or_404(Course,id=course_id)
     if request.method=="POST":
-        id = course_id
+        # id = course_id
         student_id = request.user.id
         student = get_object_or_404(Student,id=student_id)
         student.enrolled_courses.add(course)
-        return redirect('index')
+        return redirect('view_courses')
         
     return render(request,'enroll_course.html',{'course':course})
+
+def unenroll_course(request,course_id):
+    course = get_object_or_404(Course,id=course_id)
+    if request.method=="POST":        
+        request.user.student.enrolled_courses.remove(course)
+        
+    return redirect('view_courses')
