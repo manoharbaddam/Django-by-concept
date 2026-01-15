@@ -121,3 +121,6 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR,'static')]
 
 AUTH_USER_MODEL = 'userApp.CustomUser'
+LOGIN_URL = 'login_view'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'

@@ -7,9 +7,5 @@ class CourseCreationForm(forms.ModelForm):
         model = Course
         fields = '__all__'
 
-class CourseEnrollForm(forms.ModelForm):
-    class Meta:
-        model = Course
-        fields = '__all__'
     
 
