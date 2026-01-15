@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% load static %}
+
+{% block title %}Dashborad{% endblock %}
+
+{% block content %}
+    <h1>Admin Dashborad</h1>
+    {% for course in courses %}
+        {{course.title}}
+        {% for student in course.student_set.all %}
+            <p>{{student.email}}</p>
+        {% endfor %}
+    {% endfor %}
+{% endblock %}
