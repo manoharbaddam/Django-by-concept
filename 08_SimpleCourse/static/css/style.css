@@ -5,6 +5,12 @@ body{
 h1{
     color: aqua;
 }
+
+.card{
+  padding: 20px;
+  gap: 10px;
+}
+
 /* 1. Global Reset & Variables */
 :root {
   --nav-bg: rgba(255, 255, 255, 0.1); /* Glass effect base */

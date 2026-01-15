@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% load static %}
+
+{% block title %}Enroll Course {% endblock %}
+
+{% block content %}
+    <h1>Enroll Course</h1>
+    <form method="post">
+        {{form}}
+        <button type="submit">Enroll</button>
+    </form>
+{% endblock%}
+
+
