@@ -18,3 +18,6 @@ class Enrollment(models.Model):
     course = models.ForeignKey('courses.Course',on_delete=models.CASCADE,related_name='enrollments')
     enrolled_date = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=10,choices=STATUS_CHOICES,default='ACTIVE')
+
+    class Meta:
+        unique_together = ('student', 'course')

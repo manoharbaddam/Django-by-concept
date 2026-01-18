@@ -1,0 +1,16 @@
+[
+  {
+    "model": "courses.course",
+    "fields": {
+      "title": "Python Basics",
+      "description": "Learn Python fundamentals"
+    }
+  },
+  {
+    "model": "courses.course",
+    "fields": {
+      "title": "Django Fundamentals",
+      "description": "Web development with Django"
+    }
+  }
+]

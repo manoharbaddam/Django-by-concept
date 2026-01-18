@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block title %}My Courses{% endblock %}
+
+{% block content %}
+    <h1>My Courses</h1>
+    {% for course in courses %}
+        <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">{{course.title}}</h5>
+            <p class="card-text">{{course.description}}</p>
+            <a href="#" class="card-link">Enroll Course</a>
+            <a href="#" class="card-link">Another link</a>
+        </div>
+    </div>
+    {% endfor %}
+
+    {% for enrollment in enrollments %}
+        <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">{{enrollment}}</h5>
+            {% comment %} <p class="card-text">{{course.description}}</p> {% endcomment %}
+            {% comment %} <a href="#" class="card-link">Enroll Course</a> {% endcomment %}
+            {% comment %} <a href="#" class="card-link">Another link</a> {% endcomment %}
+        </div>
+    </div>
+    {% endfor %}
+
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+
+{% load static %}
+
+{% block title %}Logout{% endblock %}
+
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        <h2>Confirm Logout</h2>
+        <button type="submit">Logout</button>
+    </form>
+{% endblock %}
