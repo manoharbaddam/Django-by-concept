@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block title %}Enrollment History{% endblock %}
+
+{% block content %}
+<h1>Enrollment History</h1>
+<h4>{{ course.title }}</h4>
+
+<table class="table table-striped mt-4">
+    <thead>
+        <tr>
+            <th>Student</th>
+            <th>Enrolled On</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for enrollment in enrollments %}
+            <tr>
+                <td>{{ enrollment.student.first_name }}</td>
+                <td>{{ enrollment.enrolled_date|date:"M d, Y" }}</td>
+                <td>
+                    <span class="badge bg-secondary">
+                        {{ enrollment.status }}
+                    </span>
+                </td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="3">No enrollments yet.</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<a href="{% url 'courses:list_courses' %}" class="btn btn-secondary mt-3">
+    Back to Courses
+</a>
+{% endblock %}

@@ -1,5 +1,6 @@
 from django.shortcuts import render,get_object_or_404,redirect
 from django.contrib.auth.decorators import login_required
+from django.contrib.admin.views.decorators import staff_member_required
 from .models import Course,Enrollment
 
 # Create your views here.
@@ -42,3 +43,23 @@ def update_enrollment_status(request, pk):
             enrollment.save()
 
     return redirect("courses:my_courses")
+
+@staff_member_required
+def course_enrollment_history(request, course_id):
+    course = get_object_or_404(Course, id=course_id)
+
+    enrollments = (
+        Enrollment.objects
+        .filter(course=course)
+        .select_related("student")
+        .order_by("-enrolled_date")
+    )
+
+    return render(
+        request,
+        "course_enrollment_history.html",
+        {
+            "course": course,
+            "enrollments": enrollments,
+        }
+    )

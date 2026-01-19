@@ -9,7 +9,9 @@
             <h5 class="card-title">{{course.title}}</h5>
             <p class="card-text">{{course.description}}</p>
             <a href="{% url 'courses:enroll_course' course.id %}" class="card-link">Enroll Course</a>
-            <a href="#" class="card-link">Another link</a>
+            {% if user.is_staff %}
+            <a href="{% url 'courses:course_enrollment_history' course.id %}" class="card-link">Course History</a>
+            {% endif %}
         </div>
     </div>
     {% endfor %}
