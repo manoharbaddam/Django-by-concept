@@ -8,7 +8,7 @@
         <div class="card-body">
             <h5 class="card-title">{{course.title}}</h5>
             <p class="card-text">{{course.description}}</p>
-            <a href="{% url 'enroll_course' course.id %}" class="card-link">Enroll Course</a>
+            <a href="{% url 'courses:enroll_course' course.id %}" class="card-link">Enroll Course</a>
             <a href="#" class="card-link">Another link</a>
         </div>
     </div>

@@ -14,7 +14,7 @@ class Enrollment(models.Model):
         ('COMPLETED', 'Completed'),
         ('DROPPED', 'Dropped'),
     ]
-    student = models.ForeignKey('userApp.Student',on_delete=models.CASCADE,related_name='enrollments')
+    student = models.ForeignKey('userApp.CustomUser',on_delete=models.CASCADE,related_name='enrollments')
     course = models.ForeignKey('courses.Course',on_delete=models.CASCADE,related_name='enrollments')
     enrolled_date = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=10,choices=STATUS_CHOICES,default='ACTIVE')

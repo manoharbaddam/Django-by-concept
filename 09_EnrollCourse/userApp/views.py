@@ -1,7 +1,6 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth import login as auth_login,authenticate,logout
 from django.http import HttpResponse
-from .models import Student
 from .forms import SignupForm,LoginForm
 
 # Create your views here.

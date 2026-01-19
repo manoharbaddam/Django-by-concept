@@ -31,6 +31,7 @@ class CustomUser(AbstractBaseUser,PermissionsMixin):
     email = models.EmailField(unique=True)
     first_name = models.CharField()
     last_name = models.CharField()
+    enrolled_courses = models.ManyToManyField('courses.Course')
 
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default = False)
@@ -39,9 +40,3 @@ class CustomUser(AbstractBaseUser,PermissionsMixin):
     USERNAME_FIELD = 'email'
 
     REQUIRED_FIELDS = ['first_name']
-
-class Student(CustomUser):
-    enrolled_courses = models.ManyToManyField('courses.Course')
-
-    def __str__(self):
-        return f"{self.first_name}"

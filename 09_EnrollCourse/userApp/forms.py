@@ -1,12 +1,12 @@
 from django import forms
-from .models import Student
+from .models import CustomUser
 
 class SignupForm(forms.ModelForm):
     password1 = forms.CharField(widget=forms.PasswordInput)
     password2 = forms.CharField(widget=forms.PasswordInput)
 
     class Meta:
-        model = Student
+        model = CustomUser
         fields = ('email', 'first_name')
 
     def clean_password2(self):
