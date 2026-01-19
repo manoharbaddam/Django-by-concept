@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+    <h1>Profile</h1>
+    <h3>{{user.first_name}}</h3>
+    {% for course in all_courses %}
+        <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">{{course.title}}</h5>
+            <p class="card-text">{{course.description}}</p>
+            <a href="{% url 'courses:enroll_course' course.id %}" class="card-link">Enroll Course</a>
+            <a href="#" class="card-link">Another link</a>
+        </div>
+    </div>
+    {% endfor %}
+{% endblock %}

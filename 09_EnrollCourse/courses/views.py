@@ -22,8 +22,23 @@ def enroll_course(request, course_id):
 
     return redirect('courses:my_courses',)
 
-
+@login_required
 def my_courses(request):
-    courses = Course.objects.filter(id=request.user.id)
-    enrollments= Enrollment.objects.filter(student=request.user)
-    return render(request,'my_courses.html',{'courses':courses,'enrollments':enrollments})
+    enrollments = Enrollment.objects.filter(student=request.user)
+    return render(request,'my_courses.html',{'enrollments':enrollments})
+
+@login_required
+def update_enrollment_status(request, pk):
+    enrollment = get_object_or_404(
+        Enrollment,
+        pk=pk,
+        student=request.user  # security check
+    )
+
+    if request.method == "POST":
+        new_status = request.POST.get("status")
+        if new_status in dict(Enrollment.STATUS_CHOICES):
+            enrollment.status = new_status
+            enrollment.save()
+
+    return redirect("courses:my_courses")

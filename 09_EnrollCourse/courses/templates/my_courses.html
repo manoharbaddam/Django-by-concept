@@ -3,27 +3,48 @@
 {% block title %}My Courses{% endblock %}
 
 {% block content %}
-    <h1>My Courses</h1>
-    {% for course in courses %}
-        <div class="card" style="width: 18rem;">
-        <div class="card-body">
-            <h5 class="card-title">{{course.title}}</h5>
-            <p class="card-text">{{course.description}}</p>
-            <a href="#" class="card-link">Enroll Course</a>
-            <a href="#" class="card-link">Another link</a>
-        </div>
-    </div>
-    {% endfor %}
+<h1>My Courses</h1>
 
-    {% for enrollment in enrollments %}
-        <div class="card" style="width: 18rem;">
+{% for enrollment in enrollments %}
+    <div class="card mb-3" style="width: 18rem;">
         <div class="card-body">
-            <h5 class="card-title">{{enrollment}}</h5>
-            {% comment %} <p class="card-text">{{course.description}}</p> {% endcomment %}
-            {% comment %} <a href="#" class="card-link">Enroll Course</a> {% endcomment %}
-            {% comment %} <a href="#" class="card-link">Another link</a> {% endcomment %}
+            <h5 class="card-title">{{ enrollment.course.title }}</h5>
+            <p class="card-text">{{ enrollment.course.description }}</p>
+
+            <p class="card-text">
+                <strong>Enrolled on:</strong>
+                {{ enrollment.enrolled_date|date:"M d, Y" }}
+            </p>
+
+            <p class="card-text">
+                <strong>Status:</strong>
+                {{ enrollment.status }}
+            </p>
+
+    <form method="post" action="{% url 'courses:update_enrollment_status' enrollment.id %}">
+        {% csrf_token %}
+
+        <label class="form-label"><strong>Status:</strong></label>
+        <select name="status" class="form-select mb-2">
+            {% for key, label in enrollment.STATUS_CHOICES %}
+                <option value="{{ key }}"
+                    {% if enrollment.status == key %}selected{% endif %}
+                >
+                    {{ label }}
+                </option>
+            {% endfor %}
+        </select>
+
+        <button type="submit" class="btn btn-sm btn-primary">
+            Update Status
+        </button>
+
+    </form>
+
         </div>
     </div>
-    {% endfor %}
+{% empty %}
+    <p>You are not enrolled in any courses.</p>
+{% endfor %}
 
 {% endblock %}
