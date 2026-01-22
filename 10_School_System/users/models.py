@@ -18,6 +18,7 @@ class CustomUserManager(BaseUserManager):
         other_fields.setdefault('is_staff',True)
         other_fields.setdefault('is_superuser',True)
         other_fields.setdefault('is_active',True)
+        other_fields.setdefault("role", "ADMIN")
 
 
         if other_fields.get('is_superuser')==False:
@@ -25,7 +26,7 @@ class CustomUserManager(BaseUserManager):
         if other_fields.get('is_staff')==False:
             raise ValueError("Super User must have is_staff set to True.")
         
-        self.create_user(email=email,password=password,**other_fields)
+        return self.create_user(email,password,**other_fields)
 
 
 class CustomUser(AbstractBaseUser,PermissionsMixin):
@@ -37,31 +38,34 @@ class CustomUser(AbstractBaseUser,PermissionsMixin):
     email = models.EmailField(unique=True,blank=False)
     username = models.CharField(max_length=125,unique=True)
 
-    firstname = models.CharField(max_length=125)
-    lastname = models.CharField(max_length=125)
+    first_name = models.CharField(max_length=125)
+    last_name = models.CharField(max_length=125)
 
     role = models.CharField(max_length=20,choices=Role.choices)
 
-    is_active = models.BooleanField(default=True)
+    # Teacher-specific
+    registration_id = models.CharField(max_length=50, blank=True, null=True)
+    department = models.CharField(max_length=100, blank=True, null=True)
 
+    # Student-specific
+    admission_no = models.CharField(max_length=50, blank=True, null=True, unique=True)
+
+    is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
+    date_joined = models.DateTimeField(auto_now_add=True)
 
     objects = CustomUserManager()
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ['username','role']
 
-    if role=="STUDENT":
-        admission_no = models.CharField(max_length=50, blank=True, null=True)
-    elif role=="TEACHER":
-        registration_id = models.CharField(max_length=50, blank=True, null=True)
-        department = models.CharField(max_length=100, blank=True, null=True)
-    
-
 
     def clean(self):
-        if self.role == "TEACHER" and not self.registration_id:
+        if self.role == "TEACHER" and not self.registration_id :
             raise ValidationError("Teacher must have registration ID.")
         if self.role == "STUDENT" and not self.admission_no:
             raise ValidationError("Student must have Admission Number.")
-
+    
+    def __str__(self):
+        return f"{self.email} ({self.role})"
+    
