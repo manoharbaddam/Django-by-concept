@@ -1,6 +1,8 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth import login,authenticate
-from .forms import RegistrationForm,LoginForm
+from django.http import HttpResponseForbidden
+from django.contrib.auth.decorators import login_required
+from .forms import RegistrationForm,LoginForm,StudentCreationForm,TeacherCreationForm
 
 # Create your views here.
 def index(request):
@@ -13,6 +15,32 @@ def register_user(request):
         if form.is_valid():
             form.save()
             return redirect("login_user")
+    return render(request,'register.html',{'form':form})
+
+@login_required()
+def create_student(request):
+    if request.user.role != "ADMIN":
+        return HttpResponseForbidden()
+    
+    form = StudentCreationForm()
+    if request.method=="POST":
+        form = StudentCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("login")
+    return render(request,'register.html',{'form':form})
+
+@login_required()
+def create_teacher(request):
+    if request.user.role!="ADMIN":
+        return HttpResponseForbidden()
+    
+    form = TeacherCreationForm()
+    if request.method=="POST":
+        form = TeacherCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("login")
     return render(request,'register.html',{'form':form})
 
 def login_user(request):

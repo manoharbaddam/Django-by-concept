@@ -41,6 +41,38 @@ class RegistrationForm(forms.ModelForm):
             user.save()
         return user
 
+class StudentCreationForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput)
+
+    class Meta:
+        model = CustomUser
+        fields = ("email", "username", "admission_no")
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.role = CustomUser.Role.STUDENT
+        user.set_password(self.cleaned_data["password"])
+        if commit:
+            user.save()
+        return user
+    
+class TeacherCreationForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput)
+
+    class Meta:
+        model = CustomUser
+        fields = ("email", "username", "registration_id", "department")
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.role = CustomUser.Role.TEACHER
+        user.set_password(self.cleaned_data["password"])
+        if commit:
+            user.save()
+        return user
+
+
+
 class LoginForm(forms.ModelForm):
     email = forms.EmailField(label="Email ID")
     password = forms.CharField(label="Password",widget=forms.PasswordInput(attrs={"placeholder":"Enter Password"}))
