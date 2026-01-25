@@ -1,9 +1,11 @@
+/* ===== BASE STYLES ===== */
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
   background-color: #f4f6f8;
 }
 
+/* ===== LAYOUT STYLES ===== */
 header {
   background-color: #1f2933;
   color: #ffffff;
@@ -55,6 +57,8 @@ nav ul li a:hover {
   color: #ffffff;
 }
 
+
+
 main {
   flex: 1;
   padding: 30px;
@@ -69,24 +73,39 @@ footer {
   color: #374151;
 }
 
-/* Styling of registration form */
-
+/* ===== FORM CONTAINER BASE ===== */
 .form-container {
-    max-width: 480px;
-    margin: 40px auto;
-    padding: 40px;
+    max-width: 440px;
+    margin: 60px auto;
+    padding: 50px;
     background: white;
-    border-radius: 16px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    animation: fadeIn 0.6s ease-out;
 }
 
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== FORM HEADER ===== */
 .form-container h2 {
-    margin: 0 0 30px 0;
+    margin: 0 0 35px 0;
     color: #2d3748;
-    font-size: 28px;
+    font-size: 32px;
     font-weight: 700;
     text-align: center;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* ===== FORM STRUCTURE ===== */
+.form-container form {
+    width: 100%;
 }
 
 .form-group {
@@ -94,7 +113,8 @@ footer {
     position: relative;
 }
 
-.form-group label {
+/* ===== FORM ELEMENTS ===== */
+.form-container label {
     display: block;
     margin-bottom: 8px;
     color: #4a5568;
@@ -104,8 +124,13 @@ footer {
     letter-spacing: 0.5px;
 }
 
-.form-group input,
-.form-group select {
+/* Input and select fields */
+.form-container input[type="text"],
+.form-container input[type="email"],
+.form-container input[type="password"],
+.form-container input[type="number"],
+.form-container select,
+.form-container textarea {
     width: 100%;
     padding: 14px 16px;
     border: 2px solid #e2e8f0;
@@ -115,21 +140,37 @@ footer {
     background: #f8fafc;
     color: #2d3748;
     box-sizing: border-box;
+    font-family: inherit;
 }
 
-.form-group input:focus,
-.form-group select:focus {
+.form-container input:focus,
+.form-container select:focus,
+.form-container textarea:focus {
     outline: none;
     border-color: #4299e1;
     background: white;
     box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1);
 }
 
-.form-group input::placeholder {
+.form-container input::placeholder {
     color: #a0aec0;
 }
 
-/* Style the role dropdown specifically */
+/* Specific styles for registration form elements */
+.form-group label {
+    text-transform: uppercase;
+}
+
+/* Password fields */
+.form-group input[type="password"] {
+    letter-spacing: 2px;
+}
+
+.form-group input[type="password"]::placeholder {
+    letter-spacing: normal;
+}
+
+/* Select dropdown */
 .form-group select {
     appearance: none;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%234a5568' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
@@ -139,15 +180,7 @@ footer {
     padding-right: 48px;
 }
 
-/* Password fields specific styling */
-.form-group input[type="password"] {
-    letter-spacing: 2px;
-}
-
-.form-group input[type="password"]::placeholder {
-    letter-spacing: normal;
-}
-
+/* ===== ERROR STATES ===== */
 .error {
     color: #e53e3e;
     font-size: 14px;
@@ -166,7 +199,33 @@ footer {
     font-size: 12px;
 }
 
-.btn-submit {
+/* Django error list */
+.form-container .errorlist {
+    color: #e53e3e;
+    font-size: 14px;
+    margin: 8px 0 0 0;
+    padding: 10px 14px;
+    background: #fff5f5;
+    border-radius: 8px;
+    border-left: 4px solid #e53e3e;
+    list-style: none;
+}
+
+.form-container .errorlist li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.form-container .errorlist li:before {
+    content: "⚠";
+    font-size: 12px;
+}
+
+/* ===== BUTTONS ===== */
+/* Submit buttons for both forms */
+.btn-submit,
+.form-container button[type="submit"] {
     width: 100%;
     padding: 16px;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -178,20 +237,52 @@ footer {
     cursor: pointer;
     transition: all 0.3s ease;
     margin-top: 10px;
+}
+
+/* Specific for registration form */
+.btn-submit {
     text-transform: uppercase;
     letter-spacing: 1px;
 }
 
-.btn-submit:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+/* Specific for login form */
+.form-container button[type="submit"] {
+    padding: 18px;
+    letter-spacing: 0.5px;
+    position: relative;
+    overflow: hidden;
 }
 
-.btn-submit:active {
-    transform: translateY(0);
+.form-container button[type="submit"]::after {
+    content: "→";
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-.login-text {
+.form-container button[type="submit"]:hover::after {
+    opacity: 1;
+    transform: translateY(-50%) translateX(5px);
+}
+
+/* Hover states for both */
+.btn-submit:hover,
+.form-container button[type="submit"]:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 25px rgba(102, 126, 234, 0.3);
+}
+
+.btn-submit:active,
+.form-container button[type="submit"]:active {
+    transform: translateY(-1px);
+}
+
+/* ===== FORM FOOTER LINKS ===== */
+.login-text,
+.form-footer {
     text-align: center;
     margin-top: 30px;
     padding-top: 25px;
@@ -200,33 +291,122 @@ footer {
     font-size: 15px;
 }
 
-.login-text a {
-    color: #4299e1;
+.login-text a,
+.form-footer a {
+    color: #667eea;
     text-decoration: none;
     font-weight: 600;
     margin-left: 5px;
-    transition: color 0.2s;
+    transition: all 0.2s;
+    position: relative;
 }
 
-.login-text a:hover {
-    color: #3182ce;
-    text-decoration: underline;
+.login-text a:hover,
+.form-footer a:hover {
+    color: #764ba2;
 }
 
-/* Responsive Design */
+/* Underline animation for login form links */
+.form-footer a:after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    transition: width 0.3s ease;
+}
+
+.form-footer a:hover:after {
+    width: 100%;
+}
+
+/* ===== FORM UTILITIES ===== */
+/* Checkbox styling */
+.form-container input[type="checkbox"] {
+    margin-right: 8px;
+    transform: scale(1.2);
+    accent-color: #667eea;
+}
+
+/* Help text */
+.form-container .helptext {
+    display: block;
+    margin-top: 6px;
+    color: #a0aec0;
+    font-size: 13px;
+    font-style: italic;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+    
+    nav {
+        width: 100%;
+        padding: 10px 0;
+    }
+    
+    nav ul {
+        display: flex;
+        overflow-x: auto;
+    }
+    
+    nav ul li {
+        padding: 10px 15px;
+        white-space: nowrap;
+    }
+    
+    main {
+        padding: 20px;
+    }
+}
+
 @media (max-width: 576px) {
     .form-container {
-        margin: 20px;
-        padding: 30px 24px;
+        margin: 30px 20px;
+        padding: 35px 25px;
+    }
+    
+    .form-container h2 {
+        font-size: 28px;
+        margin-bottom: 30px;
+    }
+    
+    .form-container input[type="text"],
+    .form-container input[type="email"],
+    .form-container input[type="password"],
+    .form-container input[type="number"],
+    .form-container select,
+    .form-container textarea {
+        padding: 12px 14px;
+        font-size: 15px;
+    }
+    
+    .btn-submit,
+    .form-container button[type="submit"] {
+        padding: 14px;
+        font-size: 15px;
+    }
+}
+
+/* For very small screens */
+@media (max-width: 360px) {
+    header {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+    
+    .form-container {
+        margin: 15px;
+        padding: 25px 20px;
     }
     
     .form-container h2 {
         font-size: 24px;
-    }
-    
-    .form-group input,
-    .form-group select {
-        padding: 12px 14px;
-        font-size: 15px;
     }
 }

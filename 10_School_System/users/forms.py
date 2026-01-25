@@ -73,6 +73,6 @@ class TeacherCreationForm(forms.ModelForm):
 
 
 
-class LoginForm(forms.ModelForm):
+class LoginForm(forms.Form):
     email = forms.EmailField(label="Email ID")
     password = forms.CharField(label="Password",widget=forms.PasswordInput(attrs={"placeholder":"Enter Password"}))

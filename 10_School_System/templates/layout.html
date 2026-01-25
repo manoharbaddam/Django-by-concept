@@ -1,68 +1,67 @@
 {% load static %}
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>{% block title %}School Management System{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <!-- Global Styles -->
-</head>
-<body>
+  </head>
+  <body>
+    <header>
+      <div class="app-name">🏫 School System</div>
+      <div class="user-info">
+        {% if request.user.is_authenticated %} {{ request.user.email }} 
+        ({{ request.user.role }}) {% endif %}
+      </div>
+    </header>
 
-<header>
-    <div class="app-name">🏫 School System</div>
-    <div class="user-info">
-        {% if request.user.is_authenticated %}
-            {{ request.user.email }} ({{ request.user.role }})
-        {% endif %}
-    </div>
-</header>
-
-<div class="container">
-    <!-- Sidebar -->
-    <nav>
+    <div class="container">
+      <!-- Sidebar -->
+      <nav>
         <ul>
-            <li><a href="#">Dashboard</a></li>
+          <li><a href="#">Dashboard</a></li>
 
-            {% if request.user.role == "ADMIN" %}
-                <li><a href="#">Create Class</a></li>
-                <li><a href="#">Add User</a></li>
-                <li><a href="#">Assign Teacher</a></li>
-            {% endif %}
-
-            {% if request.user.role == "TEACHER" %}
-                <li><a href="#">My Classes</a></li>
-                <li><a href="#">My Students</a></li>
-            {% endif %}
-
-            {% if request.user.role == "STUDENT" %}
-                <li><a href="#">Available Classes</a></li>
-                <li><a href="#">My Enrollments</a></li>
-            {% endif %}
-            {% if request.user.is_authenticated %}
-                <li><a href="#">Logout</a></li>
-                {% else %}
-                <li><a href="{% url 'users:register' %}">Login/Register</a></li>
-
-            {% endif %}
+          {% if request.user.role == "ADMIN" %}
+          <li><a href="#">Create Class</a></li>
+          <li><a href="{% url 'users:add_user' %}">Add User</a></li>
+          <li><a href="#">Assign Teacher</a></li>
+          {% endif %} {% if request.user.role == "TEACHER" %}
+          <li><a href="#">My Classes</a></li>
+          <li><a href="#">My Students</a></li>
+          {% endif %} {% if request.user.role == "STUDENT" %}
+          <li><a href="#">Available Classes</a></li>
+          <li><a href="#">My Enrollments</a></li>
+          {% endif %} {% if request.user.is_authenticated %}
+          <li>
+            <form
+              action="{% url 'users:logout_user' %}"
+              method="post"
+              class="nav-form"
+            >
+              {% csrf_token %}
+              <button type="submit" class="nav-link-btn">Logout</button>
+            </form>
+          </li>
+          {% else %}
+          <li><a href="{% url 'users:login_user' %}">Login</a></li>
+          {% endif %}
         </ul>
-    </nav>
+      </nav>
 
-    <!-- Main Content -->
-    <main>
+      <!-- Main Content -->
+      <main>
         {% block content %}
         <!-- Page specific content goes here -->
         {% endblock %}
-    </main>
-</div>
+      </main>
+    </div>
 
-<footer>
-    © {{ year|default:2026 }} School Management System
-</footer>
+    <footer>© {{ year|default:2026 }} School Management System</footer>
 
-{% block extra_js %}{% endblock %}
-</body>
+    {% block extra_js %}{% endblock %}
+  </body>
 </html>

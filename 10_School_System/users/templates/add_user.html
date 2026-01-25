@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="form-container">
+    <h2>Add New User</h2>
+
+    <label>Select Role:</label>
+    <select id="role-select">
+        <option value="">-- Choose Role --</option>
+        <option value="STUDENT">Student</option>
+        <option value="TEACHER">Teacher</option>
+    </select>
+
+    <!-- Student Form -->
+    <form method="post" id="student-form" style="display:none;">
+        {% csrf_token %}
+        <input type="hidden" name="role" value="STUDENT">
+        {{ student_form.as_p }}
+        <button type="submit">Create Student</button>
+    </form>
+
+    <!-- Teacher Form -->
+    <form method="post" id="teacher-form" style="display:none;">
+        {% csrf_token %}
+        <input type="hidden" name="role" value="TEACHER">
+        {{ teacher_form.as_p }}
+        <button type="submit">Create Teacher</button>
+    </form>
+</div>
+
+<script>
+    const roleSelect = document.getElementById("role-select");
+    const studentForm = document.getElementById("student-form");
+    const teacherForm = document.getElementById("teacher-form");
+
+    roleSelect.addEventListener("change", function () {
+        studentForm.style.display = "none";
+        teacherForm.style.display = "none";
+
+        if (this.value === "STUDENT") {
+            studentForm.style.display = "block";
+        }
+        if (this.value === "TEACHER") {
+            teacherForm.style.display = "block";
+        }
+    });
+</script>
+{% endblock %}

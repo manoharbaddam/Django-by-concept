@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% load static %}
+
+{% block title %}Registration {% endblock %}
+
+{% block content %}
+    <div class="form-container">
+    <h2>Create Account</h2>
+        
+    <div>
+        <span><a href="{% url 'users:create_student' %}">Add Student</a></span>
+        <span><a href="{% url 'users:create_teacher' %}">Add Teacher</a></span>
+    </div>
+    
+</div>
+{% endblock %}
