@@ -7,7 +7,6 @@ class Class(models.Model):
     teacher = models.ForeignKey(CustomUser,on_delete=models.SET_NULL,null=True,limit_choices_to={'role':'TEACHER'})
     department = models.CharField(max_length=100)
     start_date = models.DateField()
-    start_time = models.TimeField()
 
     is_active = models.BooleanField(default=True)
     created_at  = models.DateTimeField(auto_now_add=True)

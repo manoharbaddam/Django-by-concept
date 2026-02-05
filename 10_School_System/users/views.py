@@ -3,6 +3,8 @@ from django.contrib.auth import login,authenticate,logout
 from django.http import HttpResponseForbidden
 from django.contrib.auth.decorators import login_required
 from .forms import RegistrationForm,LoginForm,StudentCreationForm,TeacherCreationForm
+from .models import CustomUser
+from courses.models import Class
 
 # Create your views here.
 def index(request):
@@ -67,5 +69,15 @@ def dashboard_view(request):
         return render(request,"dashboards/admin_dashboard.html")
     elif role=="TEACHER":
         return render(request,"dashboards/teacher_dashboard.html")
-    else:
+    elif role=="STUDENT":
         return render(request,"dashboards/student_dashboard.html")
+    
+@login_required()
+def display_students(request):
+    if request.user.role!="ADMIN":
+        return HttpResponseForbidden()
+    
+    students  = CustomUser.objects.filter(role="STUDENT")
+    teachers = CustomUser.objects.filter(role="TEACHER")
+    classes = Class.objects.all()
+    return render(request,"dashboards/admin_dashboard.html",{"students":students,"teachers":teachers,"classes":classes})

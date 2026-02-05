@@ -6,4 +6,24 @@
 {% block content %}
 <h2>Admin Dashboard</h2>
 <p>Manage classes, teachers, and students.</p>
+    <div>
+        <h4>Students</h4>
+        {% for student in students %}
+        {{student.username}}
+        {% endfor %}
+    </div>
+    <div>
+        <h4>Teachers</h4>
+        {% for teacher in teachers %}
+        {{teacher.username}}
+        {% endfor %}
+    </div>
+
+    <div>
+        <h4>Classes</h4>
+        {% for class in classes %}
+        {{class.name}}
+        {% endfor %}
+    </div>
+
 {% endblock %}

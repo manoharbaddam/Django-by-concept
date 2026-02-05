@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h2>All Classes</h2>
+
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Department</th>
+        <th>Teacher</th>
+    </tr>
+
+    {% for cls in classes %}
+    <tr>
+        <td>{{ cls.name }}</td>
+        <td>{{ cls.department }}</td>
+        <td>
+            {% if cls.teacher %}
+                {{ cls.teacher.first_name }} {{ cls.teacher.last_name }}
+            {% else %}
+                Not Assigned
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
