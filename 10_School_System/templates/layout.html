@@ -36,7 +36,7 @@
           {% endif %} 
           {% if request.user.role == "STUDENT" %}
           <li><a href="{% url 'users:dashboard_view' %}">Dashboard</a></li>
-          <li><a href="{% url 'courses:class_list' %}">Available Classes</a></li>
+          <li><a href="{% url 'courses:all_classes' %}">Available Classes</a></li>
           <li><a href="{% url 'courses:student_classes' request.user.username %}">My Enrollments</a></li>
           {% endif %} {% if request.user.is_authenticated %}
           <li>

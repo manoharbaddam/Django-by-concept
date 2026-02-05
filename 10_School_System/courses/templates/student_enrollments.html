@@ -3,6 +3,6 @@
 {% block content %}
     <h3>Classes Enrolled</h3>
     {% for class in classes %}
-        {{class.class_enrolled}}
+        {{class.class_enrolled.name}}
     {% endfor %}
 {% endblock %}

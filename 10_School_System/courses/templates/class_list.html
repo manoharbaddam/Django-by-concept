@@ -8,6 +8,7 @@
         <th>Name</th>
         <th>Department</th>
         <th>Teacher</th>
+
     </tr>
 
     {% for cls in classes %}
@@ -15,11 +16,13 @@
         <td>{{ cls.name }}</td>
         <td>{{ cls.department }}</td>
         <td>
-            {% if cls.teacher %}
-                {{ cls.teacher.first_name }} {{ cls.teacher.last_name }}
-            {% else %}
-                Not Assigned
-            {% endif %}
+           {{cls.teacher.username}}
+        </td>
+        <td>
+            <form method="post" action="{% url 'courses:enroll_class' cls.id %}">
+{% csrf_token %}
+<button type="submit">Enroll</button>
+</form>
         </td>
     </tr>
     {% endfor %}
