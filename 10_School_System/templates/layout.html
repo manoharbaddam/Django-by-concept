@@ -29,9 +29,8 @@
           <li><a href="{% url 'users:display_students' %}">Dashboard</a></li>
           <li><a href="{% url 'courses:create_class' %}">Create Class</a></li>
           <li><a href="{% url 'users:add_user' %}">Add User</a></li>
-          <li><a href="#">Assign Teacher</a></li>
           {% endif %} {% if request.user.role == "TEACHER" %}
-          <li><a href="#">My Classes</a></li>
+          <li><a href="{% url 'courses:teacher_classes' request.user.username %}">My Classes</a></li>
           <li><a href="#">My Students</a></li>
           {% endif %} 
           {% if request.user.role == "STUDENT" %}

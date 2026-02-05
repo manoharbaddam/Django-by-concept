@@ -1,0 +1,8 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <h2>Assigned Classes</h2>
+    {% for class in classes %}
+    {{class.name}}
+    {% endfor %}
+{% endblock %}
