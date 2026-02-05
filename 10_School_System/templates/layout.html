@@ -31,7 +31,6 @@
           <li><a href="{% url 'users:add_user' %}">Add User</a></li>
           {% endif %} {% if request.user.role == "TEACHER" %}
           <li><a href="{% url 'courses:teacher_classes' request.user.username %}">My Classes</a></li>
-          <li><a href="#">My Students</a></li>
           {% endif %} 
           {% if request.user.role == "STUDENT" %}
           <li><a href="{% url 'users:dashboard_view' %}">Dashboard</a></li>

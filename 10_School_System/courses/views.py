@@ -42,18 +42,33 @@ def student_classes(request, username=None):
 @login_required
 def teacher_classes(request,username=None):
     if request.user.role != "TEACHER":
-        print(request.user.role)
         return HttpResponseForbidden("Access Denied")
 
+    print(request.user.role)
     classes_assigned = Class.objects.filter(teacher=request.user)
     return render(
         request, "teacher_classes.html", {"classes_assigned": classes_assigned}
     )
 
-
+@login_required
 def enroll_class(request, class_id):
     if request.method == "POST":
         cls = get_object_or_404(Class, id=class_id)
         Enrollment.objects.create(student=request.user, class_enrolled=cls)
         return redirect("courses:student_classes", username=request.user.username)
     return redirect("courses:all_classes")
+
+@login_required
+def class_students(request, class_id):
+    cls = get_object_or_404(Class, id=class_id)
+    
+    # Get all enrollments for this class
+    enrollments = Enrollment.objects.filter(
+        class_enrolled=cls, 
+        is_active=True
+    ).select_related('student')
+    
+    return render(request, 'class_students.html', {
+        'class': cls,
+        'enrollments': enrollments
+    })

@@ -16,7 +16,7 @@ class Class(models.Model):
 
 
 class Enrollment(models.Model):
-    student= models.ForeignKey(CustomUser,on_delete=models.CASCADE,limit_choices_to={'role','STUDENT'})
+    student= models.ForeignKey(CustomUser,on_delete=models.CASCADE,limit_choices_to={'role':'STUDENT'})
     class_enrolled = models.ForeignKey(Class,on_delete=models.CASCADE,related_name='enrollments')
     enrolled_date = models.DateTimeField(auto_now_add=True)
     is_active = models.BooleanField(default=True)

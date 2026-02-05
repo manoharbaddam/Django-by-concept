@@ -1,8 +1,11 @@
 {% extends "layout.html" %}
 
 {% block content %}
+
     <h2>Assigned Classes</h2>
-    {% for class in classes %}
+    {% for class in classes_assigned %}
     {{class.name}}
+    <li><a href="{% url 'courses:class_students' class.id %}">Students</a></li>
+
     {% endfor %}
 {% endblock %}
